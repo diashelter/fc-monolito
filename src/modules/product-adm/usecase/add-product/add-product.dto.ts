@@ -1,16 +1,17 @@
 export interface AddProductInputDto {
-    name: string,
-    description: string,
-    purchasePrice: number,
-    stock: number,
+    id?: string;
+    name: string;
+    description: string;
+    purchasePrice: number;
+    stock: number;
 }
 
 export interface AddProductOutputDto {
-    id: string,
-    name: string,
-    description: string,
-    purchasePrice: number,
-    stock: number,
-    createdAt: Date,
-    updatedAt: Date
+    id: string;
+    name: string;
+    description: string;
+    purchasePrice: number;
+    stock: number;
+    createdAt: Date;
+    updatedAt: Date;
 }

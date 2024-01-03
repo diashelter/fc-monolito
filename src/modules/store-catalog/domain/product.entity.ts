@@ -2,45 +2,34 @@ import AggregateRoot from "../../@shared/domain/entity/aggregate-root.interface"
 import BaseEntity from "../../@shared/domain/entity/base.entity";
 import Id from "../../@shared/domain/value-object/id.value-object";
 
-type ProductPros = {
-    id?: Id;
+type ProductProps = {
+    id: Id;
     name: string;
     description: string;
-    purchasePrice: number;
-    stock: number;
-    createdAt?: Date;
-    updatedAt?: Date;
-}
-
+    salesPrice: number;
+};
 
 export default class Product extends BaseEntity implements AggregateRoot {
-
     private name: string;
     private description: string;
-    private purchasePrice: number;
-    private stock: number;
+    private salesPrice: number;
 
-    constructor(props: ProductPros) {
+    constructor(props: ProductProps) {
         super(props.id);
         this.name = props.name;
         this.description = props.description;
-        this.purchasePrice = props.purchasePrice;
-        this.stock = props.stock;
+        this.salesPrice = props.salesPrice;
     }
 
-    getName() {
+    getName(): string {
         return this.name;
     }
 
-    getDescription() {
+    getDescription(): string {
         return this.description;
     }
 
-    getPurchasePrice() {
-        return this.purchasePrice;
-    }
-
-    getStock() {
-        return this.stock;
+    getSalesPrice(): number {
+        return this.salesPrice;
     }
 }
