@@ -19,12 +19,12 @@ export default class AddClientUseCase {
             email: input.email,
             document: input.document,
             address: new Address(
-                input.address.street,
-                input.address.number,
-                input.address.complement,
-                input.address.city,
-                input.address.state,
-                input.address.zipCode,
+                input.street,
+                input.number,
+                input.complement,
+                input.city,
+                input.state,
+                input.zipCode,
             )
         }
 
@@ -36,14 +36,12 @@ export default class AddClientUseCase {
             name: client.getName(),
             email: client.getEmail(),
             document: client.getDocument(),
-            address: new Address(
-                client.getAddress().getStreet(),
-                client.getAddress().getNumber(),
-                client.getAddress().getComplement(),
-                client.getAddress().getCity(),
-                client.getAddress().getState(),
-                client.getAddress().getZipCode(),
-            ),
+            street: client.getAddress().getStreet(),
+            number: client.getAddress().getNumber(),
+            complement: client.getAddress().getComplement(),
+            city: client.getAddress().getCity(),
+            state: client.getAddress().getState(),
+            zipCode: client.getAddress().getZipCode(),
             createdAt: client.getCreatedAt(),
             updatedAt: client.getUpdatedAt()
         }

@@ -19,14 +19,12 @@ export default class FindClientUseCase {
             name: result.getName(),
             email: result.getEmail(),
             document: result.getDocument(),
-            address: new Address(
-                result.getAddress().getStreet(),
-                result.getAddress().getNumber(),
-                result.getAddress().getComplement(),
-                result.getAddress().getCity(),
-                result.getAddress().getState(),
-                result.getAddress().getZipCode(),
-            ),
+            street: result.getAddress().getStreet(),
+            number: result.getAddress().getNumber(),
+            complement: result.getAddress().getComplement(),
+            city: result.getAddress().getCity(),
+            state: result.getAddress().getState(),
+            zipCode: result.getAddress().getZipCode(),
             createdAt: result.getCreatedAt(),
             updatedAt: result.getUpdatedAt()
         }
