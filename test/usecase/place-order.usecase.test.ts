@@ -31,7 +31,7 @@ describe("Place Order UseCase unit test", () => {
             };
 
             //@ts-expect-error - force set productFacade
-            placeOrderUseCase["_productFacade"] = mockProductFacade;
+            placeOrderUseCase["productFacade"] = mockProductFacade;
 
             let input: PlaceOrderInputDto = {
                 clientId: "0",
@@ -83,7 +83,7 @@ describe("Place Order UseCase unit test", () => {
             };
 
             //@ts-expect-error - force set catalogFacade
-            placeOrderUseCase["_catalogFacade"] = mockCatalogFacade;
+            placeOrderUseCase["catalogFacade"] = mockCatalogFacade;
 
             await expect(placeOrderUseCase["getProduct"]("0")).rejects.toThrow(
                 new Error("Product not found")
@@ -101,7 +101,7 @@ describe("Place Order UseCase unit test", () => {
             };
 
             //@ts-expect-error - force set catalogFacade
-            placeOrderUseCase["_catalogFacade"] = mockCatalogFacade;
+            placeOrderUseCase["catalogFacade"] = mockCatalogFacade;
 
             await expect(placeOrderUseCase["getProduct"]("0")).resolves.toEqual(
                 new Product({
@@ -131,7 +131,7 @@ describe("Place Order UseCase unit test", () => {
             //@ts-expect-error - no params in constructor
             const placeOrderUseCase = new PlaceOrderUseCase();
             //@ts-expect-error - force set clientFacade
-            placeOrderUseCase["_clientFacade"] = mockClientFacade;
+            placeOrderUseCase["clientFacade"] = mockClientFacade;
 
             const input: PlaceOrderInputDto = { clientId: "0", products: [] };
 
@@ -152,7 +152,7 @@ describe("Place Order UseCase unit test", () => {
                 .mockRejectedValue(new Error("No products selected"));
 
             //@ts-expect-error - force set clientFacade
-            placeOrderUseCase["_clientFacade"] = mockClientFacade;
+            placeOrderUseCase["clientFacade"] = mockClientFacade;
 
             const input: PlaceOrderInputDto = { clientId: "1", products: [] };
             await expect(placeOrderUseCase.execute(input)).rejects.toThrow(

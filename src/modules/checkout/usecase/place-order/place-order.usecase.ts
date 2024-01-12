@@ -4,7 +4,6 @@ import ClientAdmFacadeInterface from "../../../client-adm/facade/client-adm.faca
 import InvoiceFacadeInterface from "../../../invoice/facade/invoice.facade.interface";
 import PaymentFacadeInterface from "../../../payment/facade/payment.facade.interface";
 import ProductAdmFacadeInterface from "../../../product-adm/facade/product-adm.facade.interface";
-import StoreCatalogFacade from "../../../store-catalog/facade/store-catalog.facade";
 import StoreCatalogFacadeInterface from "../../../store-catalog/facade/store-catalog.facade.interface";
 import Client from "../../domain/client.entity";
 import Order from "../../domain/order.entity";
@@ -19,7 +18,6 @@ export default class PlaceOrderUseCase implements UseCaseInterface {
     private repository: CheckoutGateway;
     private invoiceFacade: InvoiceFacadeInterface;
     private paymentFacade: PaymentFacadeInterface;
-
 
     constructor(
         clientFacade: ClientAdmFacadeInterface,
