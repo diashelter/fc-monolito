@@ -8,7 +8,7 @@ import { ClientModel } from "../modules/client-adm/repository/client.model";
 import { ProductModel } from "../modules/product-adm/repository/product.model";
 import TransactionModel from "../modules/payment/repository/transaction.model";
 import { InvoiceModel } from "../modules/invoice/repository/invoice.model";
-import { InvoiceItemModel } from "../modules/invoice/repository/invoice-item.model";
+import { InvoiceItemModel } from "../modules/invoice/repository/item.model";
 
 export const app: Express = express();
 app.use(express.json());

@@ -1,7 +1,7 @@
 import { Sequelize } from "sequelize-typescript";
 import request from 'supertest';
 import { InvoiceModel } from "../../src/modules/invoice/repository/invoice.model";
-import { InvoiceItemModel } from "../../src/modules/invoice/repository/invoice-item.model";
+import { InvoiceItemModel } from "../../src/modules/invoice/repository/item.model";
 import InvoiceFacadeFactory from "../../src/modules/invoice/factory/invoice.facade.factory";
 import { app } from "../../src/infrastructure/express";
 

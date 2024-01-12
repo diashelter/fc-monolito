@@ -3,7 +3,7 @@ import Id from "../../@shared/domain/value-object/id.value-object";
 import InvoiceItems from "../domain/invoice-item.entity";
 import Invoice from "../domain/invoice.entity";
 import InvoiceGateway from "../gateway/invoice.gateway";
-import { InvoiceItemModel } from "./invoice-item.model";
+import { InvoiceItemModel } from "./item.model";
 import { InvoiceModel } from "./invoice.model";
 
 export default class InvoiceRepository implements InvoiceGateway {
