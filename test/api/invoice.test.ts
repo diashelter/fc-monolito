@@ -1,11 +1,9 @@
 import { Sequelize } from "sequelize-typescript";
 import request from 'supertest';
 import { InvoiceModel } from "../../src/modules/invoice/repository/invoice.model";
-import { InvoiceItemsModel } from "../../src/modules/invoice/repository/invoice-items.model";
+import { InvoiceItemModel } from "../../src/modules/invoice/repository/invoice-item.model";
 import InvoiceFacadeFactory from "../../src/modules/invoice/factory/invoice.facade.factory";
-import { app } from "../../src/infrastructure/server";
-
-
+import { app } from "../../src/infrastructure/express";
 
 describe('E2E test for invoice', () => {
 	let sequelize: Sequelize;
@@ -18,7 +16,7 @@ describe('E2E test for invoice', () => {
 		sync: { force: true },
 	  });
   
-	  await sequelize.addModels([InvoiceModel, InvoiceItemsModel]);
+	  await sequelize.addModels([InvoiceModel, InvoiceItemModel]);
 	  await sequelize.sync();
     });
 

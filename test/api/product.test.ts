@@ -3,12 +3,12 @@ import request from 'supertest'
 import { Umzug } from "umzug"
 import { ProductModel } from "../../src/modules/product-adm/repository/product.model";
 import { migrator } from "../../src/infrastructure/db/config-migrations/migrator";
-import { app } from "../../src/infrastructure/server";
+import { app } from "../../src/infrastructure/express";
 
 
 describe("E2E test for product", () => {
     
-    let sequelize: Sequelize
+    let sequelize: Sequelize;
 
     let migration: Umzug<any>;
   

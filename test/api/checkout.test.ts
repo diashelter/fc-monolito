@@ -1,11 +1,11 @@
 import { Sequelize } from "sequelize-typescript"
 import request from 'supertest'
 import ProductModel from "../../src/modules/store-catalog/repository/product.model";
-import { app } from "../../src/infrastructure/server";
+import { app } from "../../src/infrastructure/express";
 
-describe("E2E test for checkout", () => { 
+describe("E2E test for checkout", () => {
 
-  let sequelize: Sequelize
+  let sequelize: Sequelize;
 
   beforeEach(async () => {
     sequelize = new Sequelize({
@@ -14,20 +14,21 @@ describe("E2E test for checkout", () => {
       logging: false,
       sync: { force: true },
     })
-    
-    sequelize.addModels([ProductModel])
-    await sequelize.sync();  })
 
-    afterEach(async () => {
-      await sequelize.close();
-    });
-  
+    sequelize.addModels([ProductModel])
+    await sequelize.sync();
+  });
+
+  afterEach(async () => {
+    await sequelize.close();
+  });
+
   it("should create a checkout", async () => {
-    
+
     const client = await request(app)
       .post("/client")
-      .send({   
-        id: "1",     
+      .send({
+        id: "1",
         name: "Client",
         email: "Email",
         document: "1234",
@@ -37,41 +38,41 @@ describe("E2E test for checkout", () => {
         city: "City",
         state: "State",
         zipCode: "29000000",
-      });  
-      
-      const product1 = await request(app)
-      .post("/product")
-      .send({
-          name: "Product1",
-          description: "Description1",
-          purchasePrice: 100,
-          stock: 100
       });
 
-      const product2 = await request(app)
+    const product1 = await request(app)
       .post("/product")
       .send({
-          name: "Product2",
-          description: "Description2",
-          purchasePrice: 200,
-          stock: 200
+        name: "Product1",
+        description: "Description1",
+        purchasePrice: 100,
+        stock: 100
       });
 
-      await ProductModel.create({
-        id: product1.body.id,
-        name: product1.body.name,
-        description: product1.body.description,
-        salesPrice: 150,
+    const product2 = await request(app)
+      .post("/product")
+      .send({
+        name: "Product2",
+        description: "Description2",
+        purchasePrice: 200,
+        stock: 200
       });
-  
-      await ProductModel.create({
-        id: product2.body.id,
-        name: product2.body.name,
-        description: product2.body.description,
-        salesPrice: 250,
-      });
- 
-      const checkout = await request(app)
+
+    await ProductModel.create({
+      id: product1.body.id,
+      name: product1.body.name,
+      description: product1.body.description,
+      salesPrice: 150,
+    });
+
+    await ProductModel.create({
+      id: product2.body.id,
+      name: product2.body.name,
+      description: product2.body.description,
+      salesPrice: 250,
+    });
+
+    const checkout = await request(app)
       .post("/checkout")
       .send({
         clientId: client.body.id,
@@ -85,9 +86,9 @@ describe("E2E test for checkout", () => {
         ]
       });
 
-      expect(checkout.status).toBe(200);
-      expect(checkout.body.products.length).toBe(2);
-      expect(checkout.body.total).toBe(400);
-      expect(checkout.body.status).toBe('approved');
-    });
+    expect(checkout.status).toBe(200);
+    expect(checkout.body.products.length).toBe(2);
+    expect(checkout.body.total).toBe(400);
+    expect(checkout.body.status).toBe('approved');
+  });
 });

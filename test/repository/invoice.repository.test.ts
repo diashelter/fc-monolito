@@ -1,6 +1,6 @@
 import { Sequelize } from "sequelize-typescript";
 import { InvoiceModel } from "../../src/modules/invoice/repository/invoice.model";
-import { InvoiceItemsModel } from "../../src/modules/invoice/repository/invoice-items.model";
+import { InvoiceItemModel } from "../../src/modules/invoice/repository/invoice-item.model";
 import InvoiceRepository from "../../src/modules/invoice/repository/invoice.repository";
 import Invoice from "../../src/modules/invoice/domain/invoice.entity";
 import Id from "../../src/modules/@shared/domain/value-object/id.value-object";
@@ -18,7 +18,7 @@ describe("Invoice Repository test", () => {
             sync: { force: true }
         });
 
-        sequelize.addModels([InvoiceModel, InvoiceItemsModel]);
+        await sequelize.addModels([InvoiceModel, InvoiceItemModel]);
         await sequelize.sync();
     });
 
@@ -57,7 +57,7 @@ describe("Invoice Repository test", () => {
 
         const resultInvoiceDb = await InvoiceModel.findOne({
             where: { id: "1" },
-            include: ["items"],
+            include: [InvoiceItemModel],
         });
 
         expect(resultInvoiceDb).toBeDefined();
@@ -103,7 +103,6 @@ describe("Invoice Repository test", () => {
             state: "SC",
             zipcode: "88888-888",
             createdAt: new Date(),
-            updatedAt: new Date(),
             items: ivoiceItems.map((item: any) => ({
                 id: item.id,
                 name: item.name,
@@ -111,7 +110,7 @@ describe("Invoice Repository test", () => {
             })),
             total: 30,
         }, {
-            include: ["items"],
+            include: [InvoiceItemModel],
         });
 
         const repository = new InvoiceRepository();

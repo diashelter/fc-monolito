@@ -3,13 +3,13 @@ import Id from "../../@shared/domain/value-object/id.value-object";
 import InvoiceItems from "../domain/invoice-item.entity";
 import Invoice from "../domain/invoice.entity";
 import InvoiceGateway from "../gateway/invoice.gateway";
-import { InvoiceItemsModel } from "./invoice-items.model";
+import { InvoiceItemModel } from "./invoice-item.model";
 import { InvoiceModel } from "./invoice.model";
 
 export default class InvoiceRepository implements InvoiceGateway {
 
     async find(id: string): Promise<Invoice> {
-        return await InvoiceModel.findOne({ where: { id }, include: [InvoiceItemsModel] })
+        return await InvoiceModel.findOne({ where: { id }, include: [InvoiceItemModel] })
             .then((invoice: InvoiceModel) => {
                 return new Invoice({
                     id: new Id(invoice.id),
@@ -23,7 +23,7 @@ export default class InvoiceRepository implements InvoiceGateway {
                         invoice.state,
                         invoice.zipcode,
                     ),
-                    items: invoice.items.map((item: InvoiceItemsModel) =>
+                    items: invoice.items.map((item: InvoiceItemModel) =>
                         new InvoiceItems({
                             id: new Id(item.id),
                             name: item.name,
@@ -55,7 +55,7 @@ export default class InvoiceRepository implements InvoiceGateway {
             createdAt: invoice.getCreatedAt(),
         },
             {
-                include: [InvoiceItemsModel],
+                include: [InvoiceItemModel],
             })
     }
 

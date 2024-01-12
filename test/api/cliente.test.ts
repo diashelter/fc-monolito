@@ -1,10 +1,7 @@
-import { Sequelize } from "sequelize-typescript"
 import request from "supertest";
-import { app } from "../../src/infrastructure/server";
+import { app, sequelize } from "../../src/infrastructure/express";
 
 describe("E2E test for client", () => {
-
-  let sequelize: Sequelize;
 
   beforeEach(async () => {
     await sequelize.sync({ force: true });
